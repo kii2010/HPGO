@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -15,19 +16,9 @@ import android.widget.Toast;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.cert.X509Certificate;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,8 +49,11 @@ public class MainActivity extends AppCompatActivity {
         main_cv_meal = findViewById(R.id.main_cv_meal);
         main_tv_today_meal = findViewById(R.id.main_tv_today_meal);
 
+        //텍스트뷰가 스크롤이 가능하게 설정
+        main_tv_today_meal.setMovementMethod(ScrollingMovementMethod.getInstance());
+
         //급식 정보 불러오기
-        //(new TodayMeal()).execute();
+        (new TodayMeal()).execute();
 
         //홈페이지 이동 구현
         school_text.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         main_cv_today_meal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                main_tv_today_meal.setText(String.valueOf(weekOfMonth));
                 (new TodayMeal()).execute();
             }
         });
@@ -93,14 +86,21 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                Document document = Jsoup.connect("https://stu.jne.go.kr/sts_sci_md00_001.do?schulCode=Q100000323&schulCrseScCode=4&schulKndScCode=04").get();
+                //급식정보를 불러올 홈페이지 접속
+                Document document = Jsoup.connect("http://stu.jne.go.kr/sts_sci_md00_001.do?schulCode=Q100000323&schulCrseScCode=4&schulKndScCode=04").validateTLSCertificates(false).get();
+                //html에서 table 속성 선택
                 Element table = document.select("table").get(0);
+                //table 속성 중 tr 속성 선택(몇 번째 주인지에 따라 달라짐)
                 Element row = table.select("tr").get(weekOfMonth);
+                //tr 속성 중 td 속성 선택(요일에 따라 달라짐)
                 Element col = row.select("td").get(dayOfWeek);
+                //td 속성 중 div 속성 선택
                 Element text = col.select("div").get(0);
 
+                //선택된 div 속성을 html 형식으로 불러오기
                 full_meal = text.html();
-
+                //html에서 줄바꿈을 의미하는 <br>을 줄바꿈으로 바꾸기
+                full_meal = full_meal.replaceAll("<br>", "");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -110,7 +110,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             Log.d("full_meal", full_meal);
+            //텍스트뷰에 적용
+            main_tv_today_meal.setText(full_meal);
         }
     } //오늘의 급식 불러오기
-
 }
