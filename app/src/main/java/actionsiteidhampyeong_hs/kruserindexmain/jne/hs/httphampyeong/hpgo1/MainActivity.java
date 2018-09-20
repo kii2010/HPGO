@@ -1,16 +1,11 @@
 package actionsiteidhampyeong_hs.kruserindexmain.jne.hs.httphampyeong.hpgo1;
 
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.telephony.SmsManager;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +18,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +33,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//앱정보 넘어가기 구현
+        main_cv_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,infoActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         //몇번째 주, 요일 불러오기
         dayOfWeek = todayAdapter.getDayOfWeek();
@@ -118,124 +121,6 @@ public class MainActivity extends AppCompatActivity {
             //텍스트뷰에 적용
             main_tv_today_meal.setText(full_meal);
         }
-    } //오늘의 급식 불러오기
-    package ghj.com.sendsms;
-
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.Build;
-import android.provider.Telephony;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.telephony.SmsManager;
-import android.telephony.SmsMessage;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-
-    public class MainActivity extends AppCompatActivity {
-
-        SmsManager mSMSManager;
-        EditText editBody;
-
-// sms 수신 , 발신
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-
-            mSMSManager = SmsManager.getDefault();
-            editBody = (EditText)findViewById(R.id.editBody);
-
-            Button btnSend = (Button)findViewById(R.id.btnSend);
-            btnSend.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    sendSms();
-                }
-            });
-        }
-
-
-        public void sendSms(){
-            //메시지
-            String body = editBody.getText().toString();
-            //160자 이하의 메시지 리스트로 만든다
-            ArrayList<String> bodyList = mSMSManager.divideMessage(body);
-
-            //송신 인텐트
-            PendingIntent sentPI = PendingIntent.getBroadcast(this, 0, new Intent("SMS_SENT"), 0);
-            //수신 인텐트
-            PendingIntent recvPI = PendingIntent.getBroadcast(this, 0, new Intent("SMS_DELIVERED"), 0);
-
-            registerReceiver(mSentReceiver, new IntentFilter("SMS_SENT"));
-            registerReceiver(mRecvReceiver, new IntentFilter("SMS_DELIVERED"));
-
-            //여러개의 SMS 메시지를 전송
-            if(bodyList.size() > 1){
-                ArrayList<PendingIntent> sentPIList = new ArrayList<>();
-                ArrayList<PendingIntent> recvPIList = new ArrayList<>();
-                for(int i=0; i<bodyList.size(); i++){
-                    sentPIList.add(sentPI);
-                    recvPIList.add(recvPI);
-                }
-                mSMSManager.sendMultipartTextMessage("010-3048-0231", null, bodyList, sentPIList, recvPIList);
-            }
-            //1개의 SMS 메시지를 전송
-            else{
-                mSMSManager.sendTextMessage("010-3048-0231", null, body, sentPI, recvPI);
-            }
-        }
-
-        BroadcastReceiver mSentReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                switch (getResultCode()){
-                    case RESULT_OK:
-                        Toast.makeText(MainActivity.this, "SMS Send", Toast.LENGTH_SHORT).show();
-                        break;
-                    case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
-                        Toast.makeText(MainActivity.this, "ERROR_GENERIC_FAILURE", Toast.LENGTH_SHORT).show();
-                        break;
-                    case SmsManager.RESULT_ERROR_NO_SERVICE:
-                        Toast.makeText(MainActivity.this, "ERROR_NO_SERVICE", Toast.LENGTH_SHORT).show();
-                        break;
-                    case SmsManager.RESULT_ERROR_NULL_PDU:
-                        Toast.makeText(MainActivity.this, "ERROR_NULL_PDU", Toast.LENGTH_SHORT).show();
-                        break;
-                    case SmsManager.RESULT_ERROR_RADIO_OFF:
-                        Toast.makeText(MainActivity.this, "ERROR_RADIO_OFF", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            }
-        };
-
-        BroadcastReceiver mRecvReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-
-            }
-
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                switch (getResultCode()){
-                    case RESULT_OK:
-                        Toast.makeText(MainActivity.this, "SMS Delivered", Toast.LENGTH_SHORT).show();
-                        break;
-                    case RESULT_CANCELED:
-                        Toast.makeText(MainActivity.this, "SMS Delivered Fail", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            }
-        };
     }
-
-}
 
 }
