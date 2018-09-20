@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorTwitchTV"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -76,7 +76,7 @@
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardBackgroundColor="@color/colorTwitchTV"
             app:cardUseCompatPadding="true"
             tools:ignore="NestedWeights">
 
@@ -128,7 +128,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/colorTwitchTV"
                     android:gravity="center_vertical"
                     android:text="오늘의 급식"
                     android:textAlignment="center"
@@ -297,7 +297,7 @@
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardBackgroundColor="@color/colorTwitchTV"
             app:cardUseCompatPadding="true"
             tools:ignore="NestedWeights">
 
@@ -330,5 +330,9 @@
             </LinearLayout>
         </android.support.v7.widget.CardView> <!-- 앱정보 위젯 -->
     </LinearLayout> <!-- 대쉬보드 세번째 줄 -->
+
+
+
+
 
 </LinearLayout>
