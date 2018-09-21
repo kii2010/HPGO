@@ -80,7 +80,11 @@ public class MainActivity extends AppCompatActivity {
         main_tv_today_meal.setMovementMethod(ScrollingMovementMethod.getInstance());
 
         //급식 정보 불러오기
-        (new TodayMeal()).execute();
+        if ((new TodayAdapter()).getHour() < 14) {
+            (new TodayMeal()).execute(2);
+        } else {
+            (new TodayMeal()).execute(3);
+        }
 
         //홈페이지 이동 구현
         school_text.setOnClickListener(new View.OnClickListener() {
@@ -124,14 +128,12 @@ public class MainActivity extends AppCompatActivity {
                 //table 속성 중 tr 속성 선택(몇 번째 주인지에 따라 달라짐)
                 Element row = table.select("tr").get(1);
                 //tr 속성 중 td 속성 선택(요일에 따라 달라짐)
-                Element col = row.select("td").get(dayOfWeek);
-                //td 속성 중 div 속성 선택
-                Element text = col.select("div").get(0);
+                Element text = row.select("td").get(dayOfWeek);
 
                 //선택된 div 속성을 html 형식으로 불러오기
                 full_meal = text.html();
                 //html에서 줄바꿈을 의미하는 <br>을 줄바꿈으로 바꾸기
-                full_meal = full_meal.replaceAll("<br>", "");
+                full_meal = full_meal.replaceAll("<br>", "\n");
                 return voids[0];
             } catch (IOException e) {
                 e.printStackTrace();
