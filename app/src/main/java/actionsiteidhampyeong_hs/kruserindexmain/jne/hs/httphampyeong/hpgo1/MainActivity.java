@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -75,6 +74,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        main_cv_time_table.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, timetableActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        main_cv_meal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, mealActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         //텍스트뷰가 스크롤이 가능하게 설정
         main_tv_today_meal.setMovementMethod(ScrollingMovementMethod.getInstance());
@@ -152,9 +168,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-            Log.d("full_meal", full_meal);
-            //텍스트뷰에 적용
-            main_tv_today_meal.setText(full_meal);
         }
     }
 

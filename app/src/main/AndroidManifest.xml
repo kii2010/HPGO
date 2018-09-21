@@ -20,7 +20,9 @@
         </activity>
         <activity android:name=".infoActivity" />
         <activity android:name=".peopleActivity" />
-        <activity android:name=".noticeActivity"></activity>
+        <activity android:name=".noticeActivity" />
+        <activity android:name=".timetableActivity" />
+        <activity android:name=".mealActivity"></activity>
     </application>
 
 </manifest>
