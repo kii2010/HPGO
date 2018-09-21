@@ -20,4 +20,11 @@ public class TodayAdapter {
         int mWeekOfMonth = Integer.parseInt(simpleDateFormat.format(today));
         return mWeekOfMonth;
     }
+    public int getHour() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("H");
+        int mHour = Integer.parseInt(simpleDateFormat.format(today));
+        return mHour;
+    }
 }
+
+//시간 불러오는 함수

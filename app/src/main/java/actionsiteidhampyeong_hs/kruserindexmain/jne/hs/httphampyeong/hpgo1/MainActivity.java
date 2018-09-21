@@ -33,15 +33,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//앱정보 넘어가기 구현
-        main_cv_info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,infoActivity.class);
-                startActivity(intent);
-
-            }
-        });
 
         //몇번째 주, 요일 불러오기
         dayOfWeek = todayAdapter.getDayOfWeek();
@@ -56,6 +47,34 @@ public class MainActivity extends AppCompatActivity {
         school_text = findViewById(R.id.main_top_text);
         main_cv_meal = findViewById(R.id.main_cv_meal);
         main_tv_today_meal = findViewById(R.id.main_tv_today_meal);
+
+        //앱정보 넘어가기 구현
+        main_cv_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, infoActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        main_cv_people.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, peopleActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        main_cv_notice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, noticeActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
 
         //텍스트뷰가 스크롤이 가능하게 설정
         main_tv_today_meal.setMovementMethod(ScrollingMovementMethod.getInstance());
@@ -78,13 +97,17 @@ public class MainActivity extends AppCompatActivity {
         main_cv_today_meal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                (new TodayMeal()).execute();
+                if ((new TodayAdapter()).getHour() < 14) {
+                    (new TodayMeal()).execute(2);
+                } else {
+                    (new TodayMeal()).execute(3);
+                }
             }
         });
     }
 
     //급식 불러오기 함수
-    private class TodayMeal extends AsyncTask<Void, Void, Void> {
+    private class TodayMeal extends AsyncTask<Integer, Void, Integer> {
 
         @Override
         protected void onPreExecute() {
@@ -92,14 +115,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected Integer doInBackground(Integer... voids) {
             try {
                 //급식정보를 불러올 홈페이지 접속
-                Document document = Jsoup.connect("http://stu.jne.go.kr/sts_sci_md00_001.do?schulCode=Q100000323&schulCrseScCode=4&schulKndScCode=04").validateTLSCertificates(false).get();
+                Document document = Jsoup.connect("https://stu.jne.go.kr/sts_sci_md01_001.do?schulCode=Q100000323&schulCrseScCode=4&schulKndScCode=04&schMmealScCode=" + voids[0]).validateTLSCertificates(false).get();
                 //html에서 table 속성 선택
-                Element table = document.select("table").get(0);
+                Element table = document.select("table tbody").get(0);
                 //table 속성 중 tr 속성 선택(몇 번째 주인지에 따라 달라짐)
-                Element row = table.select("tr").get(weekOfMonth);
+                Element row = table.select("tr").get(1);
                 //tr 속성 중 td 속성 선택(요일에 따라 달라짐)
                 Element col = row.select("td").get(dayOfWeek);
                 //td 속성 중 div 속성 선택
@@ -109,14 +132,24 @@ public class MainActivity extends AppCompatActivity {
                 full_meal = text.html();
                 //html에서 줄바꿈을 의미하는 <br>을 줄바꿈으로 바꾸기
                 full_meal = full_meal.replaceAll("<br>", "");
+                return voids[0];
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return null;
+            return -1;
         }
 
         @Override
-        protected void onPostExecute(Void result) {
+        protected void onPostExecute(Integer result) {
+            if (result == 2) {
+                main_tv_today_meal.setText("중식\n" + full_meal);
+            } else if (result == 3) {
+                main_tv_today_meal.setText("석식\n" + full_meal);
+            } else if (result == -1) {
+                main_tv_today_meal.setText("불러오지 못했습니다.");
+            }
+
+
             Log.d("full_meal", full_meal);
             //텍스트뷰에 적용
             main_tv_today_meal.setText(full_meal);
