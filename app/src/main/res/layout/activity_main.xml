@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:background="@color/colorTwitchTV"
+        android:background="@color/colorPrimary"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -76,7 +76,7 @@
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/colorTwitchTV"
+            app:cardBackgroundColor="@color/colorPrimary"
             app:cardUseCompatPadding="true"
             tools:ignore="NestedWeights">
 
@@ -128,7 +128,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:background="@color/colorTwitchTV"
+                    android:background="@color/colorPrimary"
                     android:gravity="center_vertical"
                     android:text="오늘의 급식"
                     android:textAlignment="center"
@@ -297,7 +297,7 @@
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/colorTwitchTV"
+            app:cardBackgroundColor="@color/colorPrimary"
             app:cardUseCompatPadding="true"
             tools:ignore="NestedWeights">
 
