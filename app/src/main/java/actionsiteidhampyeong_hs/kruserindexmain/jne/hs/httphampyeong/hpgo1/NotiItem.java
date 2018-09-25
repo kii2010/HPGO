@@ -1,9 +1,9 @@
 package actionsiteidhampyeong_hs.kruserindexmain.jne.hs.httphampyeong.hpgo1;
 
-public class Notiltem {
+public class NotiItem {
     private String mTitle, mDate, mWriter;
 
-    public Notiltem(String title, String date, String writer) {
+    public NotiItem(String title, String date, String writer) {
         mTitle = title;
         mDate = date;
         mWriter = writer;
