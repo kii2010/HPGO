@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -29,10 +30,25 @@ public class noticeActivity extends AppCompatActivity {
 
         noti_toolbar = findViewById(R.id.noti_toolbar);
         noti_recycler = findViewById(R.id.noti_recycler);
+        noti_toolbar.setTitle("공지사항");
         setSupportActionBar(noti_toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         noti_recycler.setLayoutManager(new LinearLayoutManager(this));
 
+        mNotiList = new ArrayList<>();
+
+        Notiparse notiparse = new Notiparse();
+        notiparse.execute();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private class Notiparse extends AsyncTask<Void, Void, Void> {
@@ -43,7 +59,7 @@ public class noticeActivity extends AppCompatActivity {
         protected void onPreExecute() {
             asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             asyncDialog.setMessage("공지사항를 불러오는 중입니다.");
-
+            asyncDialog.setCancelable(false);
             // show dialog
             asyncDialog.show();
             super.onPreExecute();
@@ -53,14 +69,14 @@ public class noticeActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             try {
                 Document noti_doc = Jsoup.connect("http://hampyeong.hs.jne.kr/user/indexSub.action?framePath=unknownboard&siteId=hampyeong_hs&dum=dum&boardId=422382&page=1&command=list&status=").get();
-                Element table = noti_doc.select("table.wb tbody").get(0);
+                Element table = noti_doc.select("table tbody").get(0);
                 Elements rows = table.select("tr");
 
                 for (int i = 1; i < rows.size(); i++) {
                     Element row = rows.get(i);
                     Element title = row.select("td").get(1);
                     Element writer = row.select("td").get(2);
-                    Element date = row.select("td").get(4);
+                    Element date = row.select("td").get(3);
 
                     String notiTitle = title.text();
                     String notiWriter = writer.text();
