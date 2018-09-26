@@ -13,7 +13,7 @@
 
         <Preference
             android:summary=" "
-            android:title="업데이트"/>
+            android:title="업데이트" />
 
     </PreferenceCategory>
 
@@ -23,14 +23,16 @@
             android:summary="기획구상 및 애플리케이션 개발"
             android:title="김태웅" />
         <Preference
-            android:summary="정재욱"
-            android:title="애플리케이션 개발 및 전반적인 디자인" />
+            android:summary="애플리케이션 개발 및 전반적인 디자인"
+            android:title="정재욱" />
         <Preference
             android:summary="개발자들에게 건의사항 메일 보내기"
-            android:title="건의 사항" />
-        <intent
-            android:action="android.intent.action.SENDTO"
-            android:data="mailto:kii2010@naver.com" />
+            android:title="건의 사항">
+            <intent
+                android:action="android.intent.action.SENDTO"
+                android:data="mailto:kii2010@naver.com" />
+        </Preference>
+
 
     </PreferenceCategory>
 </PreferenceScreen>
