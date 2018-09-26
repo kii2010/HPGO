@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="애플리케이션 정보">
+
+        <Preference
+            android:summary="식단,수업시간표,공지사항 등을 스마트폰을 통해 확인 가능"
+            android:title="함평고등학교 애플리케이션" />
+
+        <Preference
+            android:summary="version.1.0.0"
+            android:title="Version" />
+
+        <Preference
+            android:summary=" "
+            android:title="업데이트"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="개발자 정보">
+
+        <Preference
+            android:summary="기획구상 및 애플리케이션 개발"
+            android:title="김태웅" />
+        <Preference
+            android:summary="정재욱"
+            android:title="애플리케이션 개발 및 전반적인 디자인" />
+        <Preference
+            android:summary="개발자들에게 건의사항 메일 보내기"
+            android:title="건의 사항" />
+        <intent
+            android:action="android.intent.action.SENDTO"
+            android:data="mailto:kii2010@naver.com" />
+
+    </PreferenceCategory>
+</PreferenceScreen>
+

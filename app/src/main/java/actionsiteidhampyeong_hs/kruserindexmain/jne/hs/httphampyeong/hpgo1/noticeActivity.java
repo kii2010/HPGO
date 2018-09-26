@@ -56,6 +56,7 @@ public class noticeActivity extends AppCompatActivity {
         ProgressDialog asyncDialog = new ProgressDialog(noticeActivity.this);
 
         @Override
+        //로딩창 구현
         protected void onPreExecute() {
             asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             asyncDialog.setMessage("공지사항를 불러오는 중입니다.");
