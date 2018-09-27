@@ -26,11 +26,11 @@ public class peopleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notice);
+        setContentView(R.layout.activity_people);
 
         peop_toolbar = findViewById(R.id.peop_toolbar);
         peop_recycler = findViewById(R.id.peop_recycler);
-        peop_toolbar.setTitle("임원소개");
+        peop_toolbar.setTitle("임원소개..");
         setSupportActionBar(peop_toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         peop_recycler.setLayoutManager(new LinearLayoutManager(this));
@@ -58,27 +58,27 @@ public class peopleActivity extends AppCompatActivity {
         @Override
         //로딩창 구현
         protected void onPreExecute() {
+            super.onPreExecute();
             asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             asyncDialog.setMessage("임원리스트를 불러오는 중입니다.");
             asyncDialog.setCancelable(false);
             // show dialog
             asyncDialog.show();
-            super.onPreExecute();
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                Document noti_doc = Jsoup.connect("http://hampyeong.hs.jne.kr/user/indexSub.action?codyMenuSeq=29923&siteId=hampyeong_hs&menuUIType=").get();
-                Element table = noti_doc.select("table tbody").get(0);
+                Document noti_doc = Jsoup.connect("http://hampyeong.hs.jne.kr/user/indexSub.action?codyMenuSeq=29948&siteId=hampyeong_hs&menuUIType=sub").get();
+                Element table = noti_doc.select("table").get(1);
                 Elements rows = table.select("tr");
 
                 for (int i = 1; i < rows.size(); i++) {
                     Element row = rows.get(i);
-                    Element name = row.select("td").get(1);
-                    Element subject = row.select("td").get(2);
-                    Element tast = row.select("td").get(3);
-                    Element grade = row.select("td").get(4);  ///////////  <<  추가
+                    Element name = row.select("td").get(0);
+                    Element subject = row.select("td").get(1);
+                    Element tast = row.select("td").get(2);
+                    Element grade = row.select("td").get(3);  ///////////  <<  추가
 
                     String peopname = name.text();
                     String peopsubject = subject.text();

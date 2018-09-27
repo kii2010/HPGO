@@ -34,13 +34,9 @@ public class PeopAdapter extends RecyclerView.Adapter<PeopAdapter.PeopViewHolder
 
         String peopname = currentItem.getPeopname();
         String peopsubject = currentItem.getPeopsubject();
-        String peoptast = currentItem.getPeoptast();
-        String peopgrade = currentItem.getPeopgrade();
 
         holder.mPeopname.setText(peopname);
         holder.mPeopsubject.setText(peopsubject);
-        holder.mPeoptast.setText(peoptast);
-        holder.mPeopgrade.setText(peopgrade);
     }
 
     @Override
@@ -49,7 +45,7 @@ public class PeopAdapter extends RecyclerView.Adapter<PeopAdapter.PeopViewHolder
     }
 
     public class PeopViewHolder extends RecyclerView.ViewHolder {
-        public TextView mPeopname, mPeopsubject, mPeoptast, mPeopgrade;
+        public TextView mPeopname, mPeopsubject;
 
         public PeopViewHolder(View itemView) {
             super(itemView);

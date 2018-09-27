@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompatLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,16 +7,14 @@
     android:orientation="vertical"
     tools:context=".infoActivity">
 
-    <Toolbar
+    <android.support.v7.widget.Toolbar
         android:id="@+id/appinfo_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-    </Toolbar>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/settings_preference.xml"
@@ -25,5 +23,5 @@
         android:layout_height="match_parent" />
 
 
-</android.support.v7.widget.LinearLayoutCompatLayout>
+</LinearLayout>
 
