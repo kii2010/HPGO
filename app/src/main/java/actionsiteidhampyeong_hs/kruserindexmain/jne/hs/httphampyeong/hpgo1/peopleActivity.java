@@ -61,6 +61,9 @@ public class peopleActivity extends AppCompatActivity implements PeopAdapter.OnI
         args.putString(EXTRA_GRADE, clickedItem.getPeopgrade());
         args.putString(EXTRA_SUBJECT, clickedItem.getPeopsubject());
         args.putString(EXTRA_PEOPTAST, clickedItem.getPeoptast());
+        detaildialog detaildialog = new detaildialog();
+        detaildialog.setArguments(args);
+        detaildialog.show(getSupportFragmentManager(), "tag");
     }
 
     private class Peopparse extends AsyncTask<Void, Void, Void> {
