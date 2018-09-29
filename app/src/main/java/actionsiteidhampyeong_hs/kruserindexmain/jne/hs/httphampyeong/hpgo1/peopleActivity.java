@@ -17,7 +17,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class peopleActivity extends AppCompatActivity {
+public class peopleActivity extends AppCompatActivity implements PeopAdapter.OnItemClickListner {
     public static final String EXTRA_NAME = "name", EXTRA_SUBJECT = "subject", EXTRA_PEOPTAST = "task", EXTRA_GRADE = "grade";
     private PeopAdapter mPeopAdaper;
     private ArrayList<PeopItem> mPeopList;
