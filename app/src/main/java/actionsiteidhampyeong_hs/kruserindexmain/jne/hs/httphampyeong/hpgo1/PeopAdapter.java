@@ -15,6 +15,16 @@ public class PeopAdapter extends RecyclerView.Adapter<PeopAdapter.PeopViewHolder
 
     private Context mContext;
     private ArrayList<PeopItem> mPeopList;
+    private OnItemClickListner mListener;
+
+    public interface OnItemClickListner {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListner listener) {
+        mListener = listener;
+    }
+
 
     public PeopAdapter(Context context, ArrayList<PeopItem> peopList) {
         mContext = context;
@@ -44,6 +54,7 @@ public class PeopAdapter extends RecyclerView.Adapter<PeopAdapter.PeopViewHolder
         return mPeopList.size();
     }
 
+    // == 같다   != 다르다
     public class PeopViewHolder extends RecyclerView.ViewHolder {
         public TextView mPeopname, mPeopsubject;
 
@@ -51,7 +62,18 @@ public class PeopAdapter extends RecyclerView.Adapter<PeopAdapter.PeopViewHolder
             super(itemView);
             mPeopname = itemView.findViewById(R.id.item_title1);
             mPeopsubject = itemView.findViewById(R.id.item_title2);
-
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) ;
+                        {
+                            mListener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }

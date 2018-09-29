@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class peopleActivity extends AppCompatActivity {
+    public static final String EXTRA_NAME = "name", EXTRA_SUBJECT = "subject", EXTRA_PEOPTAST = "task", EXTRA_GRADE = "grade";
     private PeopAdapter mPeopAdaper;
     private ArrayList<PeopItem> mPeopList;
     Toolbar peop_toolbar;
@@ -49,6 +50,17 @@ public class peopleActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Bundle args = new Bundle();
+        PeopItem clickedItem = mPeopList.get(position);
+
+        args.putString(EXTRA_NAME, clickedItem.getPeopname());
+        args.putString(EXTRA_GRADE, clickedItem.getPeopgrade());
+        args.putString(EXTRA_SUBJECT, clickedItem.getPeopsubject());
+        args.putString(EXTRA_PEOPTAST, clickedItem.getPeoptast());
     }
 
     private class Peopparse extends AsyncTask<Void, Void, Void> {
