@@ -112,6 +112,7 @@ public class peopleActivity extends AppCompatActivity implements PeopAdapter.OnI
         protected void onPostExecute(Void result) {
             mPeopAdaper = new PeopAdapter(peopleActivity.this, mPeopList);
             peop_recycler.setAdapter(mPeopAdaper);
+            mPeopAdaper.setOnItemClickListener(peopleActivity.this);
             asyncDialog.dismiss();
         }
     }

@@ -12,8 +12,7 @@ import android.widget.TextView;
 public class detaildialog extends DialogFragment {
     String mname, msubject, mtask, mgrade;
 
-    TextView
-            text_viewtask, text_viewsubject, text_viewgrade;
+    TextView text_viewtask, text_viewsubject, text_viewgrade;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -24,11 +23,14 @@ public class detaildialog extends DialogFragment {
         text_viewgrade = veiw.findViewById(R.id.grade);
         text_viewsubject = veiw.findViewById(R.id.sujectclass);
         text_viewtask = veiw.findViewById(R.id.task);
+
+        //불러온 변수 지정
         Bundle mArgs = getArguments();
         mname = mArgs.getString(peopleActivity.EXTRA_NAME);
         mtask = mArgs.getString(peopleActivity.EXTRA_PEOPTAST);
         mgrade = mArgs.getString(peopleActivity.EXTRA_GRADE);
         msubject = mArgs.getString(peopleActivity.EXTRA_SUBJECT);
+
         text_viewtask.setText(mtask);
         text_viewsubject.setText(msubject);
         text_viewgrade.setText(mgrade);
@@ -38,15 +40,11 @@ public class detaildialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         detaildialog.this.dismiss();
-
-
                     }
 
                 });
         builder.setCancelable(false);
         return builder.create();
-
-
     }
 
 }
