@@ -84,7 +84,7 @@ public class TimeTableActivity_1 extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                //firstSettingDialog.show(getSupportFragmentManager(), "tag");
+                firstSettingDialog.show(getSupportFragmentManager(), "tag");
                 return true;
             case android.R.id.home:
                 onBackPressed();

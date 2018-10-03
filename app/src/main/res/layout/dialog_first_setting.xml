@@ -9,8 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:paddingTop="8dp"
             android:text="반:"
             android:textAlignment="viewEnd"
             android:textColor="@android:color/black"
@@ -43,5 +44,22 @@
             android:layout_height="20dp"
             android:layout_margin="5dp"
             android:entries="@array/class_number" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:paddingTop="8dp"
+            android:text="수준별:"
+            android:textAlignment="viewEnd"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/level_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_margin="5dp"
+            android:entries="@array/level" />
     </LinearLayout>
 </LinearLayout>

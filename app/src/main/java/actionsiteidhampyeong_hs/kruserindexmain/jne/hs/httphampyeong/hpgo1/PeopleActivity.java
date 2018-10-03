@@ -31,7 +31,7 @@ public class PeopleActivity extends AppCompatActivity implements PeopleAdapter.O
 
         peop_toolbar = findViewById(R.id.peop_toolbar);
         peop_recycler = findViewById(R.id.peop_recycler);
-        peop_toolbar.setTitle("임원소개..");
+        peop_toolbar.setTitle("임원소개");
         setSupportActionBar(peop_toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         peop_recycler.setLayoutManager(new LinearLayoutManager(this));
