@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,7 +18,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class noticeActivity extends AppCompatActivity {
+public class noticeActivity extends AppCompatActivity implements NotiAdapter.OnItemClickListner {
     private NotiAdapter mNotiAdaper;
     private ArrayList<NotiItem> mNotiList;
     Toolbar noti_toolbar;
@@ -51,6 +52,16 @@ public class noticeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onItemClick(int position) {
+        Toast.makeText(getApplicationContext(), "세부 사항내용표시", Toast.LENGTH_LONG).show();
+        NotiItem clickedItem = mNotiList.get(position);
+
+
+
+
+    }
+
     private class Notiparse extends AsyncTask<Void, Void, Void> {
 
         ProgressDialog asyncDialog = new ProgressDialog(noticeActivity.this);
@@ -78,12 +89,21 @@ public class noticeActivity extends AppCompatActivity {
                     Element title = row.select("td").get(1);
                     Element writer = row.select("td").get(2);
                     Element date = row.select("td").get(3);
+                    //// 스타트===
+                    Element info = row.select("td").get(2);
+                    Element Url = info.select("a").get(0);
+
+
+
 
                     String notiTitle = title.text();
                     String notiWriter = writer.text();
                     String notiDate = date.text();
+                    String notiInfo = info.text();
 
-                    mNotiList.add(new NotiItem(notiTitle, notiDate, notiWriter));
+                    mNotiList.add(new NotiItem(notiTitle, notiDate, notiWriter, notiInfo));
+                    mNotiAdaper.setOnItemClickListener(noticeActivity.this);
+
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -96,6 +116,7 @@ public class noticeActivity extends AppCompatActivity {
             mNotiAdaper = new NotiAdapter(noticeActivity.this, mNotiList);
             noti_recycler.setAdapter(mNotiAdaper);
             asyncDialog.dismiss();
+
         }
     }
 }
