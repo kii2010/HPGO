@@ -18,11 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".infoActivity" />
-        <activity android:name=".peopleActivity" />
-        <activity android:name=".noticeActivity" />
-        <activity android:name=".timetableActivity" />
-        <activity android:name=".mealActivity"></activity>
+        <activity android:name=".InfoActivity" />
+        <activity android:name=".PeopleActivity" />
+        <activity android:name=".NoticeActivity" />
+        <activity android:name=".TimetableActivity" />
+        <activity android:name=".MealActivity"></activity>
     </application>
 
 </manifest>

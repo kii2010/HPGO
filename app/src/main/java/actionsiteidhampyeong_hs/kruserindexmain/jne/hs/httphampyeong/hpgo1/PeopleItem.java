@@ -1,9 +1,9 @@
 package actionsiteidhampyeong_hs.kruserindexmain.jne.hs.httphampyeong.hpgo1;
 
-public class PeopItem {
+public class PeopleItem {
     private String mname, msubject, mtast, mgrade;
 
-    public PeopItem(String name, String subject, String tast, String grade) {
+    public PeopleItem(String name, String subject, String tast, String grade) {
         mname = name;
         msubject = subject;
         mtast = tast;

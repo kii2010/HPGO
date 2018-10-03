@@ -24,7 +24,7 @@ import org.jsoup.nodes.Element;
 
 import java.io.IOException;
 
-public class mealActivity extends AppCompatActivity {
+public class MealActivity extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 

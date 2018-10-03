@@ -11,10 +11,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class PeopAdapter extends RecyclerView.Adapter<PeopAdapter.PeopViewHolder> {
+public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopViewHolder> {
 
     private Context mContext;
-    private ArrayList<PeopItem> mPeopList;
+    private ArrayList<PeopleItem> mPeopList;
     private OnItemClickListner mListener;
 
     public interface OnItemClickListner {
@@ -26,7 +26,7 @@ public class PeopAdapter extends RecyclerView.Adapter<PeopAdapter.PeopViewHolder
     }
 
 
-    public PeopAdapter(Context context, ArrayList<PeopItem> peopList) {
+    public PeopleAdapter(Context context, ArrayList<PeopleItem> peopList) {
         mContext = context;
         mPeopList = peopList;
     }
@@ -40,7 +40,7 @@ public class PeopAdapter extends RecyclerView.Adapter<PeopAdapter.PeopViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull PeopViewHolder holder, int position) {
-        PeopItem currentItem = mPeopList.get(position);
+        PeopleItem currentItem = mPeopList.get(position);
 
         String peopname = currentItem.getPeopname();
         String peopsubject = currentItem.getPeopsubject();
@@ -67,8 +67,7 @@ public class PeopAdapter extends RecyclerView.Adapter<PeopAdapter.PeopViewHolder
                 public void onClick(View v) {
                     if (mListener != null) {
                         int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) ;
-                        {
+                        if (position != RecyclerView.NO_POSITION) {
                             mListener.onItemClick(position);
                         }
                     }

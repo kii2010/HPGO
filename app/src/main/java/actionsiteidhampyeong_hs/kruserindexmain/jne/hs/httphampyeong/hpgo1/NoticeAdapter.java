@@ -11,10 +11,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.NotiViewHolder> {
+public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NotiViewHolder> {
 
     private Context mContext;
-    private ArrayList<NotiItem> mNotiList;
+    private ArrayList<NoticeItem> mNotiList;
     private OnItemClickListner mListener;
 
     public interface OnItemClickListner {
@@ -26,7 +26,7 @@ public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.NotiViewHolder
     }
 
 
-    public NotiAdapter(Context context, ArrayList<NotiItem> notiList) {
+    public NoticeAdapter(Context context, ArrayList<NoticeItem> notiList) {
         mContext = context;
         mNotiList = notiList;
 
@@ -41,17 +41,15 @@ public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.NotiViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull NotiViewHolder holder, int position) {
-        NotiItem currentItem = mNotiList.get(position);
+        NoticeItem currentItem = mNotiList.get(position);
 
         String notiTitle = currentItem.getNoticeTitle();
         String notiDate = currentItem.getNoticeDate();
         String notiWriter = currentItem.getNoticeWriter();
-        String notInfo = currentItem.getNoticeInfo();
 
         holder.mNotiTitle.setText(notiTitle);
         holder.mNotiDate.setText(notiDate);
         holder.mNotiWriter.setText(notiWriter);
-        holder.mNotiInfo.setText(notInfo);
 
     }
 
@@ -61,27 +59,25 @@ public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.NotiViewHolder
     }
 
     public class NotiViewHolder extends RecyclerView.ViewHolder {
-        public TextView mNotiTitle, mNotiDate, mNotiWriter, mNotiInfo;
+        public TextView mNotiTitle, mNotiDate, mNotiWriter;
 
         public NotiViewHolder(View itemView) {
             super(itemView);
             mNotiTitle = itemView.findViewById(R.id.item_title);
             mNotiDate = itemView.findViewById(R.id.item_date);
             mNotiWriter = itemView.findViewById(R.id.item_writer);
-            mNotiInfo = itemView.findViewById(R.id.item_info);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mListener != null) {
-                         int position !=RecyclerView.NO_POSITION{
-                             mListener.onItemClick(position);
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            mListener.onItemClick(position);
                         }
                     }
                 }
-
             });
-
         }
     }
 }

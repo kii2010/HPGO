@@ -1,6 +1,8 @@
 package actionsiteidhampyeong_hs.kruserindexmain.jne.hs.httphampyeong.hpgo1;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,9 +19,9 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class noticeActivity extends AppCompatActivity implements NotiAdapter.OnItemClickListner {
-    private NotiAdapter mNotiAdaper;
-    private ArrayList<NotiItem> mNotiList;
+public class NoticeActivity extends AppCompatActivity implements NoticeAdapter.OnItemClickListner {
+    private NoticeAdapter mNotiAdaper;
+    private ArrayList<NoticeItem> mNotiList;
     Toolbar noti_toolbar;
     RecyclerView noti_recycler;
 
@@ -54,17 +55,15 @@ public class noticeActivity extends AppCompatActivity implements NotiAdapter.OnI
 
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(getApplicationContext(), "세부 사항내용표시", Toast.LENGTH_LONG).show();
-        NotiItem clickedItem = mNotiList.get(position);
-
-
-
-
+        NoticeItem clickedItem = mNotiList.get(position);
+        Uri detail_noti = Uri.parse("http://hampyeong.hs.jne.kr/user/" + clickedItem.getNoticeInfo());
+        Intent intent = new Intent(Intent.ACTION_VIEW, detail_noti);
+        startActivity(intent);
     }
 
     private class Notiparse extends AsyncTask<Void, Void, Void> {
 
-        ProgressDialog asyncDialog = new ProgressDialog(noticeActivity.this);
+        ProgressDialog asyncDialog = new ProgressDialog(NoticeActivity.this);
 
         @Override
         //로딩창 구현
@@ -89,21 +88,16 @@ public class noticeActivity extends AppCompatActivity implements NotiAdapter.OnI
                     Element title = row.select("td").get(1);
                     Element writer = row.select("td").get(2);
                     Element date = row.select("td").get(3);
-                    //// 스타트===
-                    Element info = row.select("td").get(2);
-                    Element Url = info.select("a").get(0);
-
-
-
+                    // 스타트===
+                    Element info = row.select("td").get(1);
+                    String Url = info.select("a").attr("href");
 
                     String notiTitle = title.text();
                     String notiWriter = writer.text();
                     String notiDate = date.text();
-                    String notiInfo = info.text();
+                    String notiInfo = Url;
 
-                    mNotiList.add(new NotiItem(notiTitle, notiDate, notiWriter, notiInfo));
-                    mNotiAdaper.setOnItemClickListener(noticeActivity.this);
-
+                    mNotiList.add(new NoticeItem(notiTitle, notiDate, notiWriter, notiInfo));
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -113,10 +107,10 @@ public class noticeActivity extends AppCompatActivity implements NotiAdapter.OnI
 
         @Override
         protected void onPostExecute(Void result) {
-            mNotiAdaper = new NotiAdapter(noticeActivity.this, mNotiList);
+            mNotiAdaper = new NoticeAdapter(NoticeActivity.this, mNotiList);
             noti_recycler.setAdapter(mNotiAdaper);
+            mNotiAdaper.setOnItemClickListener(NoticeActivity.this);
             asyncDialog.dismiss();
-
         }
     }
 }

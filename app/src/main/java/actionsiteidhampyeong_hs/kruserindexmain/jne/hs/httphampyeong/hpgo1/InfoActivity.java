@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-public class infoActivity extends AppCompatActivity {
+public class InfoActivity extends AppCompatActivity {
 
     Toolbar info_toolbar;
 

@@ -17,10 +17,10 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class peopleActivity extends AppCompatActivity implements PeopAdapter.OnItemClickListner {
+public class PeopleActivity extends AppCompatActivity implements PeopleAdapter.OnItemClickListner {
     public static final String EXTRA_NAME = "name", EXTRA_SUBJECT = "subject", EXTRA_PEOPTAST = "task", EXTRA_GRADE = "grade";
-    private PeopAdapter mPeopAdaper;
-    private ArrayList<PeopItem> mPeopList;
+    private PeopleAdapter mPeopAdaper;
+    private ArrayList<PeopleItem> mPeopList;
     Toolbar peop_toolbar;
     RecyclerView peop_recycler;
 
@@ -55,20 +55,20 @@ public class peopleActivity extends AppCompatActivity implements PeopAdapter.OnI
     @Override
     public void onItemClick(int position) {
         Bundle args = new Bundle();
-        PeopItem clickedItem = mPeopList.get(position);
+        PeopleItem clickedItem = mPeopList.get(position);
 
         args.putString(EXTRA_NAME, clickedItem.getPeopname());
         args.putString(EXTRA_GRADE, clickedItem.getPeopgrade());
         args.putString(EXTRA_SUBJECT, clickedItem.getPeopsubject());
         args.putString(EXTRA_PEOPTAST, clickedItem.getPeoptast());
-        detaildialog detaildialog = new detaildialog();
-        detaildialog.setArguments(args);
-        detaildialog.show(getSupportFragmentManager(), "tag");
+        DetailDialog DetailDialog = new DetailDialog();
+        DetailDialog.setArguments(args);
+        DetailDialog.show(getSupportFragmentManager(), "tag");
     }
 
     private class Peopparse extends AsyncTask<Void, Void, Void> {
 
-        ProgressDialog asyncDialog = new ProgressDialog(peopleActivity.this);
+        ProgressDialog asyncDialog = new ProgressDialog(PeopleActivity.this);
 
         @Override
         //로딩창 구현
@@ -100,7 +100,7 @@ public class peopleActivity extends AppCompatActivity implements PeopAdapter.OnI
                     String peoptast = tast.text();
                     String peopgrade = grade.text();      /////////////// <   <   추가
 
-                    mPeopList.add(new PeopItem(peopname, peopsubject, peoptast, peopgrade));
+                    mPeopList.add(new PeopleItem(peopname, peopsubject, peoptast, peopgrade));
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -110,9 +110,9 @@ public class peopleActivity extends AppCompatActivity implements PeopAdapter.OnI
 
         @Override
         protected void onPostExecute(Void result) {
-            mPeopAdaper = new PeopAdapter(peopleActivity.this, mPeopList);
+            mPeopAdaper = new PeopleAdapter(PeopleActivity.this, mPeopList);
             peop_recycler.setAdapter(mPeopAdaper);
-            mPeopAdaper.setOnItemClickListener(peopleActivity.this);
+            mPeopAdaper.setOnItemClickListener(PeopleActivity.this);
             asyncDialog.dismiss();
         }
     }

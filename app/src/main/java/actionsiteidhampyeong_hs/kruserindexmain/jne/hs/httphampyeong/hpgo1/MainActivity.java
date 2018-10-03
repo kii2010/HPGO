@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         main_cv_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, infoActivity.class);
+                Intent intent = new Intent(MainActivity.this, InfoActivity.class);
                 startActivity(intent);
 
             }
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         main_cv_people.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, peopleActivity.class);
+                Intent intent = new Intent(MainActivity.this, PeopleActivity.class);
                 startActivity(intent);
             }
         });
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         main_cv_notice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, noticeActivity.class);
+                Intent intent = new Intent(MainActivity.this, NoticeActivity.class);
                 startActivity(intent);
 
             }
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         main_cv_time_table.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, timetableActivity.class);
+                Intent intent = new Intent(MainActivity.this, TimetableActivity.class);
                 startActivity(intent);
 
             }
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         main_cv_meal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, mealActivity.class);
+                Intent intent = new Intent(MainActivity.this, MealActivity.class);
                 startActivity(intent);
 
             }

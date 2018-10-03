@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-public class detaildialog extends DialogFragment {
+public class DetailDialog extends DialogFragment {
     String mname, msubject, mtask, mgrade;
 
     TextView text_viewtask, text_viewsubject, text_viewgrade;
@@ -26,10 +26,10 @@ public class detaildialog extends DialogFragment {
 
         //불러온 변수 지정
         Bundle mArgs = getArguments();
-        mname = mArgs.getString(peopleActivity.EXTRA_NAME);
-        mtask = mArgs.getString(peopleActivity.EXTRA_PEOPTAST);
-        mgrade = mArgs.getString(peopleActivity.EXTRA_GRADE);
-        msubject = mArgs.getString(peopleActivity.EXTRA_SUBJECT);
+        mname = mArgs.getString(PeopleActivity.EXTRA_NAME);
+        mtask = mArgs.getString(PeopleActivity.EXTRA_PEOPTAST);
+        mgrade = mArgs.getString(PeopleActivity.EXTRA_GRADE);
+        msubject = mArgs.getString(PeopleActivity.EXTRA_SUBJECT);
 
         text_viewtask.setText(mtask);
         text_viewsubject.setText(msubject);
@@ -39,7 +39,7 @@ public class detaildialog extends DialogFragment {
                 .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        detaildialog.this.dismiss();
+                        DetailDialog.this.dismiss();
                     }
 
                 });
