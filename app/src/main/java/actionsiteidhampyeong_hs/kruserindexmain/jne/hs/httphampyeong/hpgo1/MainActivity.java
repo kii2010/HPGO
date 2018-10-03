@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         main_cv_time_table.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TimetableActivity.class);
+                Intent intent = new Intent(MainActivity.this, TimeTableActivity_1.class);
                 startActivity(intent);
 
             }

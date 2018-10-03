@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="100dp"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="환영합니다.\n시작하기 전에 학반을 설정해 주세요."
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="학년:"
+            android:textAlignment="viewEnd"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/grade_dynamic"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_margin="5dp"
+            android:entries="@array/grade"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="반:"
+            android:textAlignment="viewEnd"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/class_dynamic"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_margin="5dp"
+            android:entries="@array/class_number" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="수준별:"
+            android:textAlignment="viewEnd"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/level_dynamic"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_margin="5dp"
+            android:entries="@array/level" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/finish_btn"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="완료"
+        android:textColor="@android:color/white"
+        tools:layout_editor_absoluteX="131dp"
+        tools:layout_editor_absoluteY="220dp" />
+
+    <TextView
+        android:id="@+id/just_start"
+        android:layout_width="350dp"
+        android:layout_height="match_parent"
+        android:textSize="15sp"
+        android:text="괜찮습니다. 그냥 시작할래요."
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"/>
+</LinearLayout>

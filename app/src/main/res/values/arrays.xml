@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="grade">
+        <item>1학년</item>
+        <item>2학년</item>
+        <item>3학년</item>
+    </string-array>
+
+    <string-array name="class_number">
+        <item>1반</item>
+        <item>2반</item>
+        <item>3반</item>
+        <item>4반</item>
+    </string-array>
+
+    <string-array name="level">
+        <item>A반</item>
+        <item>B반</item>
+        <item>C반</item>
+        <item>D반</item>
+        <item>E반</item>
+    </string-array>
+
+    <string-array name="level2">
+        <item>문과 A반</item>
+        <item>문과 B반</item>
+        <item>문과 C반</item>
+        <item>이과 A반</item>
+        <item>이과 B반</item>
+        <item>이과 C반</item>
+    </string-array>
+
+    <string-array name="level3">
+        <item>없습니다.</item>
+    </string-array>
+</resources>
